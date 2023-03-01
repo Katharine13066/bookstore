@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.bookstore.web.ui.author.AuthorBrowse"
+        messagesPack="com.company.bookstore.web.ui.author"
+        caption="msg://browseCaption"
+        lookupComponent="authorsTable"
+        focusComponent="genericFilter">
+    <dsContext>
+        <collectionDatasource id="authorsDs"
+                              class="com.company.bookstore.entity.Author"
+                              view="browse">
+            <query>
+                <![CDATA[select e from bookstore$Author e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <vbox id="filterBox" expand="table-panel" spacing="true" height="100%">
+            <filter id="genericFilter"
+                    datasource="authorsDs" stylename="edit-area" applyTo="authorsTable">
+                <properties include=".*"/>
+            </filter>
+            <vbox id="table-panel" expand="authorsTable" spacing="true">
+                <table id="authorsTable"
+                       width="100%"
+                       presentations="true"
+                       multiselect="true">
+                    <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                        <button id="createBtn"
+                                action="authorsTable.create"/>
+                        <thesis:separator/>
+                        <button id="editBtn"
+                                action="authorsTable.edit"/>
+                        <button id="removeBtn"
+                                action="authorsTable.remove"/>
+                    </buttonsPanel>
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <rowsCount/>
+                    <columns>
+                        <column id="fullName"/>
+                    </columns>
+                    <rows datasource="authorsDs"/>
+                </table>
+            </vbox>
+        </vbox>
+    </layout>
+</window>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<filters xmlns="http://schemas.haulmont.com/thesis/5.1/filters.xsd">
+    <!-- Фильтр "По Автору" -->
+    <filterDescriptor>
+        <filterEntities>
+            <filterEntity screen="bookstore$OnlineOrder.lookup"
+                          code="OnlineOrder.SysFilter.ByAuthor"
+                          entityName="bookstore$OnlineOrder"/>
+        </filterEntities>
+        <conditions>
+            <filter>
+                <and>
+                    <c name="author" class="com.company.bookstore.entity.Author" caption="msg://com.company.bookstore.entity/Author"
+                       type="CUSTOM" entityAlias="d" join="join d.books b">
+                        b.id in (select k.id from bookstore$Book k join k.authors a where
+                        a.id = :component$genericFilter.author59834)
+                        <param name="component$genericFilter.author59834"
+                               javaClass="com.company.bookstore.entity.Author">
+                            NULL
+                        </param>
+                    </c>
+                </and>
+            </filter>
+        </conditions>
+    </filterDescriptor>
+</filters>

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2023 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="application" insertBefore="administration">
+        <item id="bookstore$OnlineOrder.lookup"/>
     </menu>
+    <item id="bookstore$Author.lookup" insertAfter="ts$SubscriberEdm.browse"/>
+    <item id="bookstore$Book.lookup" insertAfter="ts$SubscriberEdm.browse"/>
+    <item id="bookstore$PurchaseOrder.lookup" insertAfter="df$DocKind.browse"/>
+    <item id="bookstore$PurchaseOrder.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="bookstore$PurchaseOrder:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
 </menu-config>
